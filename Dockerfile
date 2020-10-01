@@ -15,7 +15,7 @@ ADD $SUBMISSION_SUBFOLDER /app
 
 
 COPY ./Gemfile .
-RUN gem install bundler
+RUN gem install bundler -v  1.17.2
 RUN bundle install
 
 # Overwrite the script and test files
