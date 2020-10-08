@@ -2,25 +2,15 @@
 # Space Complexity: O(1)
 def newman_conway(num)
   raise ArgumentError.new("Parameter must be a positive int") if num == 0
+  return "1" if num == 1
 
-  number_hash = { 1 => 1, 2 => 1 }
+  pattern_arr = [0, 1, 1]
 
-  nc_helper(num, number_hash)
-
-  pattern_string = ""
-
-  (1..num).each do |i|
-    pattern_string += number_hash[i].to_s
-    pattern_string += " "
+  i = 3
+  while i <= num
+    pattern_arr << pattern_arr[pattern_arr[i - 1]] + pattern_arr[i - pattern_arr[i - 1]]
+    i += 1
   end
 
-  pattern_string.chop
-end
-
-def nc_helper(n, hash)
-  if hash[n]
-    hash[n]
-  else
-    hash[n] = nc_helper(nc_helper(n - 1, hash), hash) + nc_helper(n - nc_helper(n - 1, hash), hash); 
-  end
+  pattern_arr[1..-1].join(" ")
 end
